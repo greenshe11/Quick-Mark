@@ -28,8 +28,7 @@ try:
     vibrator = activity.getSystemService(context.VIBRATOR_SERVICE)
     
 
-    
-    
+
 except Exception as e:
     on_android = False
 
@@ -304,21 +303,22 @@ CustomScreenManager:
                 height: self.minimum_height
                 md_bg_color: (1,1,1,1)
                 padding: 0  # Set padding to 0
-                spacing: 0 
+                spacing: 0
                 
                 MDStackLayout:
                     id: idtf_items
                     size_hint: 1,None
-                    spacing: 30
+                    spacing: 10
                     height: dp(400)  # Adjust the height as needed
                     orientation: 'tb-lr'
-                    padding: 20,20
+                    padding: 40,40
+                    spacing: 20
 
                     BoxLayout:
                         orientation: 'horizontal'
                         size_hint: (1,None)
                         height: dp(48)
-                        padding: 20,20
+                        
                         
                         MDLabel:
                             id: _1
@@ -328,6 +328,7 @@ CustomScreenManager:
                         MDTextField:
                             id: _1_field
                             mode: "fill"
+                            hint_text: '(max: 15 characters)'
                             size_hint_x: 0.8
                             font_size: '18dp'
                             max_text_length: 15
@@ -337,7 +338,7 @@ CustomScreenManager:
                         orientation: 'horizontal'
                         size_hint: (1,None)
                         height: dp(48)
-                        padding: 20,20
+                        
                         
                         MDLabel:
                             id: _2
@@ -348,6 +349,7 @@ CustomScreenManager:
                             id: _2_field
                             mode: "fill"
                             opacity: 1
+                            hint_text: '(max: 15 characters)'
                             size_hint_x: 0.8
                             font_size: '18dp'
                             max_text_length: 15
@@ -357,7 +359,7 @@ CustomScreenManager:
                         orientation: 'horizontal'
                         size_hint: (1,None)
                         height: dp(48)
-                        padding: 20,20
+                    
                         
                         MDLabel:
                             id: _3
@@ -367,6 +369,7 @@ CustomScreenManager:
                         MDTextField:
                             id: _3_field
                             mode: "fill"
+                            hint_text: '(max: 15 characters)'
                             size_hint_x: 0.8
                             font_size: '18dp'
                             max_text_length: 15
@@ -376,7 +379,7 @@ CustomScreenManager:
                         orientation: 'horizontal'
                         size_hint: (1,None)
                         height: dp(48)
-                        padding: 20,20
+                        
                         
                         MDLabel:
                             id: _4
@@ -388,6 +391,7 @@ CustomScreenManager:
                             mode: "fill"
                             #width: "240dp" 
                             font_size: '18dp'
+                            hint_text: '(max: 15 characters)'
                             size_hint_x: 0.8
                             max_text_length: 15
                             on_text: (lambda *args: root.autovalidate_item(4))()
@@ -396,7 +400,7 @@ CustomScreenManager:
                         orientation: 'horizontal'
                         size_hint: (1,None)
                         height: dp(48)
-                        padding: 20,20
+                        
                         MDLabel:
                             id: _5
                             text: '5'
@@ -404,14 +408,13 @@ CustomScreenManager:
                         
                         MDTextField:
                             id: _5_field
+                            hint_text: '(max: 15 characters)'
                             mode: "fill"
                             size_hint_x: 0.8
                             font_size: '18dp'
                             max_text_length: 15
                             on_text: (lambda *args: root.autovalidate_item(5))()
 
-        
-                
     MDBoxLayout:
         orientation: 'horizontal'
         size_hint: 1, 0.1
@@ -425,7 +428,7 @@ CustomScreenManager:
             #pos_hint: {"center_x": .5, "center_y": .5}
             #on_release: root.previous()
             #size_hint: 0.35,1
-           
+
         MDRectangleFlatButton:
             id: jump
             text: "JUMP"
@@ -3272,6 +3275,7 @@ class KeyScreenIDTF(KeyScreen):
         answer_item.answer_key = str(content.text)
 
     def on_screen(self, test_type=None, page=None):
+        
         items_per_page = self.items_per_page
         self.page = self.page if page is None else page
         self.ids.pos_nav_label.text = 'Home > Sheets > Answer Keys (Identification)'
@@ -3279,7 +3283,8 @@ class KeyScreenIDTF(KeyScreen):
         self.test_type_open = 'idtf'
         if self.page > math.ceil(len(answer_key.get_items())/items_per_page):
             self.page = math.ceil(len(answer_key.get_items())/items_per_page)
-
+        if self.page < 0:
+            self.page = 1
         saved_list = self.ids.idtf_items
         iterations = 0
         self.ids.page_num_label.text = f'Page Number: {self.page} of {math.ceil(len(answer_key.get_items())/items_per_page)}'
@@ -4317,10 +4322,6 @@ class AnswerSheetScreen(Screen):
                 continue
         self.apply_count(set_items=False)
         
-
-
-
-
     #METHOD_____________________________________________________-
 
     def apply_count_for_type(self, key_type,set_items=True):
@@ -4389,7 +4390,6 @@ class AnswerSheetScreen(Screen):
         scheduler.pass_parameter('generate_template_thread', 'path',template_path)
         #self.update_image_texture(image_texture,template_path)
         
-
     def update_image_texture(self, texture,path):
         # Get a reference to the Image widget
         image = self.ids.generated_image
@@ -4542,6 +4542,7 @@ class Scheduler:
 
     def not_working(self):
         self.working = False
+
     def bg_run_once(self,func,name, callback_func = None, make_queue= False):
         """_summary_
 
@@ -4575,9 +4576,7 @@ class Scheduler:
                 self.thread_queues[name] = []
                 self.thread_queues[name].append([func, callback_func,{}])
         
-            
-
-     
+   
     def _do_callback(self, func,name,make_queue):
         kwargs = self.parameters[name]
         queue = []
