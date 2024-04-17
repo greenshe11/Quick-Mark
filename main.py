@@ -589,8 +589,7 @@ CustomScreenManager:
         ScrollView:
             id: scroll_view
             size_hint: (1, None)
-            height: dp(500)
-            
+            height: dp(400)
 
             MDList:
                 id: saved_list 
@@ -599,6 +598,7 @@ CustomScreenManager:
                 md_bg_color: (1,1,1,1)
                 padding: 0  # Set padding to 0
                 spacing: 0 
+    
     MDFloatingActionButton:
         icon: 'import'
         on_release:  root.import_sheet() #Call add_new_sheet method from CheckScreen        
@@ -3922,8 +3922,6 @@ class FeedBack(BoxLayout):
         super(FeedBack, self).__init__(**kwargs)
         self.frame_image = Image(size_hint=(1,1), pos_hint={'center_x': 0.5, 'center_y': 0.5},allow_stretch=True, keep_ratio=False)
 
-
-
 #CLASS________________________________________________________
 
 class CheckScreen(Screen):
@@ -3936,7 +3934,7 @@ class CheckScreen(Screen):
         confirmation_dialog('Are you sure you want to delete?\nThis process is irreversible.',
                             yes_func = lambda *args: (fs.delete_opened_session(),self.manager.change_screen('onecheck')),
                             no_func = lambda instance: None)
-         # deletes last opened session
+         # deletes last opened  session
 
     def share(self):
         name=f'{fs.get_last_opened_session().name}-{fs.sheets[fs.open_index].name}.png'
