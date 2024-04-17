@@ -1,0 +1,84 @@
+* ---------------------------------------------------
+Todo: * ------------------------------------------
+* ------------------------------------------------
+# (DONE) allow max screen preview of image into vertical (tap to open, tap to close; image inside button widget)
+    #for checkscreen and answer sheetscreen
+#Modify header of feedback image containing Sheet Namem, Session (recipient) name, date checked
+#change homescreen and onecheckscreen into swipe page view instead of pure scroll view;
+ #   to fix laggy gui in 10+ item list
+#fix mispelled answerkeysheet text hint
+#(DONE) set contnuous page nav interval into 1 second, preivously .5
+#remove next and previous button in mcqanalysisiscren
+#add confirmation dialog upon sheet/session delete and app exit
+#rename session as recipient(?)
+#In onechckecsreen item list. INstead of date, use scores [mc,tf,idtf] as seconday text
+#make default sheet name as untitled
+#make default checkscreen name as unnamed
+#fix toast position; positinn in phone not quite correct. (currently in bottom-right corner)
+#remove unusued pluss button in topapptoolbar in keyscreen
+#make bar graph in item analysis have light gray color
+#IN checkscreen, show max points ex. Multile Choice: 1/20 instead of Multile Chsos: 1\
+#Change QuickMark title to AppName
+#Fix bug cannot attach file (image is nowehre to be found, forgotten change in path?)
+# (DONE) File Exprt BUg not opening
+# (DONE) In feedback image, leave only correct(GREEN) and filled answer(BLACK). Rmove Yellow and Red
+   # Green is understandble to be one of the correct answers. Black is understood to be the student answer
+   # Filled box that doenst have a green mark is already understood as wrong.
+   # This to fix times where a an unfilled box is detected as answer. 
+    #    Rare, mostly in dim light. Doesnt affect correctness but shows its incorrect label on feedback img.
+    #Alternatively, make threshold stricter but gives risk of undetected fill.
+# (DONE) Fix Bug feedback image stitching only 1 image; make a dummy white only clone
+   #(DONE) Bug: When using only true or false test type; results on a portrait image.
+#OCR, enhance
+#Import or export sheet or test paper
+Too Long loading times for checksreen,
+#disable update when fit score exceed threshold
+#Detect if is a identificaiton
+*_____________________________________________
+17/04/2024
+CHECK ANALYSIS
+    >ISSUES
+    (Test=OK)total doesnt include Identification
+    (Test=OK)identiification not recording
+    (Test=OK) Overall statistics is by test type; should be by student
+        
+        
+17/04/2024 5:40
+CHECK SCREEN
+    >ISSUES
+        (Test=OK) Make font color gray if not taken record
+
+17/04/2024
+(Test=OK) Import, Export, Share of Sheet
+
+17/04/2024
+Allow Analysis to be exported as Image
+
+17/04/2024
+>>>>>>>>>>>>>>>>>>>>>>ISSUES
+    Rare occurance of sessions not reading
+>>>>>>>>>>>>>>>>>>>>>>ISSUES
+    Cut off in homescreen scrollview in bottom
+
+(Test->) Printable Analysis
+Make Confirmation Dialogue before exiting
+(Test ->) Give Android Permisions
+(Suspended) Allow points allocation per item
+
+*_______________________________________________
+XXXXXXXXXXXXXXXXXXXXXX
+
+
+* ---------------------------------------------------------------------
+Maybe???:-----------------------
+* ----------------------------------------------------------------------
+Create loading screen for startup as indicator (Not Simply BlackScreen) by adding another screen
+Make a more robust file system save file method by separating data to methods.
+    current method is sensitive to changes to FileSystem class object.  
+MCQANAlysisscreen sort by number of correct
+Fix and debug still ungoing unknown anomaly to OMR where sometimes not detected even on an obviously clearer shot
+Make a stricter box detection to which box is valid in Sheet Scanner (camera)
+Make item analysis more space efficient by utilizing 4 images only as input. (currently images = number of items)
+Make creation of sheet image more space efficient (currently @ 30 MB)
+#(DONE) feedback directory is just basically same image only with borders. Make it more efficient by generating it on runtime only.
+  #  (106 MB! currently)

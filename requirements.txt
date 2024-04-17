@@ -1,0 +1,6 @@
+
+numpy>=1.24.3
+opencv-python>=4.9.0
+matplotlib>=3.7.5
+kivymd==1.1.1
+tensorflow>=2.13.0
