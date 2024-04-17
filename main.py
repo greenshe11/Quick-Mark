@@ -304,7 +304,7 @@ CustomScreenManager:
                 md_bg_color: (1,1,1,1)
                 padding: 0  # Set padding to 0
                 spacing: 0
-                
+
                 MDStackLayout:
                     id: idtf_items
                     size_hint: 1,None
@@ -3627,10 +3627,10 @@ class NameScreen(Screen):
         
     def delete_sheet(self):
         print("DELETING")
-        fs.delete_opened_sheet() # deletes last opened session
-        self.manager.change_screen('home')
-
-        
+        confirmation_dialog('Are you sure you want to delete? \nThis process is irreversible.',
+                            yes_func = lambda *args: (fs.delete_opened_sheet(),self.manager.change_screen('home')),
+                            no_func = lambda instance: instance.parent.dismiss())
+         # deletes last opened session
 
 
     def show_btn_keys(self, *args,**kwarg):
@@ -3908,8 +3908,8 @@ class FileManager(MDFileManager):
 
     def exit_manager(self, *args):
         # Method to handle exit event
-        
         self.close()
+        
         
 # CLASS_________________________________________________________
         
@@ -3933,8 +3933,10 @@ class CheckScreen(Screen):
     #METHOD________________________________________________
     def delete_session(self):
         print("DELETING")
-        fs.delete_opened_session() # deletes last opened session
-        self.manager.change_screen('onecheck')
+        confirmation_dialog('Are you sure you want to delete?\nThis process is irreversible.',
+                            yes_func = lambda *args: (fs.delete_opened_session(),self.manager.change_screen('onecheck')),
+                            no_func = lambda instance: None)
+         # deletes last opened session
 
     def share(self):
         name=f'{fs.get_last_opened_session().name}-{fs.sheets[fs.open_index].name}.png'
@@ -4078,9 +4080,11 @@ class CheckScreen(Screen):
         mc_count =  len(mc_key)
         tf_score = fs.get_last_opened_session()._tf_score
         tf_count =  len(tf_key)
+        idtf_score = fs.get_last_opened_session()._idtf_score
+        idtf_count =  len(tf_key)
         recipient =  fs.get_last_opened_session().name
         sheetname = fs.sheets[fs.open_index].name
-        string = f'Sheet [{sheetname}] Recipient [{recipient}] Multiple Choice Score [{mc_score}/{mc_count}] True or False Score [{tf_score}/{tf_count}] '
+        string = f'Sheet [{sheetname}] Recipient [{recipient}] Multiple Choice Score [{mc_score}/{mc_count}] True or False Score [{tf_score}/{tf_count}] Identification [{idtf_score}/{idtf_count}]'
 
         stitch_sheet(1,1,1,string,'assets/feedback_stitched.png',img_stack, True,empty_header=True,font_scale=0.75)
         
@@ -4500,6 +4504,8 @@ def autosave_callback():
     #scheduler.safe_exit=True
     if scheduler.safe_exit:
         manager.stop()
+        
+        
     autosave_sched() # restart when don
 
 def autosave_sched():
@@ -4654,7 +4660,10 @@ class App(MDApp):
         dummy = self.root.get_screen('home') # just for obvious accessing of manager attribute
         
         if dummy.manager.current == 'home': # on first screen
-            scheduler.safe_exit = True
+            confirmation_dialog('Are you sure you want to exit?',
+                            yes_func = lambda *args: setattr(scheduler, 'safe_exit',True),
+                            no_func = lambda *args: None)
+            #scheduler.safe_exit = True
             
         elif dummy.manager.current in ['name','name_expanded']:
             dummy.manager.change_screen('home') # go back to home
@@ -4796,6 +4805,23 @@ class SchedClassDummy:
     def __init__(self):
         self.fbc = None
 
+def confirmation_dialog(text, yes_func, no_func):
+    
+    dialog = MDDialog(
+        text=text
+    )
+    dialog = MDDialog(
+        text=text,
+        buttons = [
+            MDFlatButton(
+                text="Yes", on_release=lambda x: (yes_func(), dialog.dismiss(force=True))
+            ),
+            MDFlatButton(
+                text="No", on_release=lambda x: dialog.dismiss(force=True)
+            ),
+        ]
+    )
+    dialog.open()
 scheduler = Scheduler()
 fbc = SchedClassDummy()
 btn_img_obj = ButtonImage()

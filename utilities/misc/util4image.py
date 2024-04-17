@@ -161,7 +161,7 @@ def _add_title(image,title,scale=1):
     font = cv2.FONT_HERSHEY_SIMPLEX
     font_scale = scale
     font_color = (0,0,0)  # White color in BGR format
-    thickness = 3  # Thickness of the text
+    thickness = 2  # Thickness of the text
 
     # Add text to the image
     cv2.putText(image, text, position, font, font_scale, font_color, thickness)
@@ -188,7 +188,6 @@ def fit_score(mc_num, tf_num, idtf_num):
     return total
         
 
-    
 def stich_all_image(mc_num, tf_num, idtf_num,title, save_path=None, filepaths=None, stitch_header=True, empty_header = False, font_scale=None):
     """stitch all images.
     returns filepath of template
