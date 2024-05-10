@@ -12,7 +12,6 @@ matplotlib.use('agg')
 # Disable debug messages from Matplotlib
 logging.getLogger('matplotlib').setLevel(logging.WARNING)
 
-
 try:
     on_android = True
     from android.storage import primary_external_storage_path
@@ -26,8 +25,6 @@ try:
     context = autoclass('android.content.Context')
     activity = python_activity.mActivity
     vibrator = activity.getSystemService(context.VIBRATOR_SERVICE)
-    
-
 
 except Exception as e:
     on_android = False
@@ -35,7 +32,6 @@ except Exception as e:
 def vibrate(pattern):
         if on_android:
             vibrator.vibrate(pattern)
-    
 
 # LOCAL FILES/MODULES
 from utilities.misc.util4image import fit_score,stich_all_image as stitch_sheet, fit_score
@@ -44,7 +40,6 @@ from utilities.misc.searchsystem import SearchSystem
 from utilities.misc.image2pdf import generate as generate_pdf
 from screens.camera import CameraWidget
 import utilities.misc.feedback_sheet as feedback
-
 
 # KIVY/KIVYMD IMPORTS
 #kivymd misc
@@ -126,7 +121,7 @@ CustomScreenManager:
         height: self.minimum_height
         pos_hint: {'center_x': 0.5}
         MDTopAppBar:
-            title: "AppName"
+            title: "QuickMark"
             left_action_items: [['chevron-left', lambda x: app.screen_manager_func()]]
             right_action_items: [["cog-outline", lambda x: print(setattr(root.manager, 'current', 'name'),root.add_new_sheet(),'hello world')]]
             elevation: 0
@@ -242,7 +237,7 @@ CustomScreenManager:
         height: self.minimum_height
         pos_hint: {'center_x': 0.5}
         MDTopAppBar:
-            title: "AppName"
+            title: "QuickMark"
             left_action_items: [['chevron-left', lambda x: app.screen_manager_func()]]
             right_action_items: [["cog-outline", lambda x: print(setattr(root.manager, 'current', 'name'),root.add_new_sheet(),'hello world')]]
             elevation: 0
@@ -503,7 +498,7 @@ CustomScreenManager:
             pos: self.pos
     
     MDTopAppBar:
-        title: "AppName"
+        title: "QuickMark"
         pos_hint: {"top": 1,}
         left_action_items: [['menu', lambda x: app.screen_manager_func()]]
         right_action_items: [["e", ""]]
@@ -515,7 +510,7 @@ CustomScreenManager:
         height: self.minimum_height
         pos_hint: {'center_x': 0.5}
         MDTopAppBar:
-            title: "AppName"
+            title: "QuickMark"
             left_action_items: [['close-box', lambda x: app.screen_manager_func()]]
             right_action_items: [["",""]]
             elevation: 0
@@ -631,7 +626,7 @@ CustomScreenManager:
         height: self.minimum_height
         pos_hint: {'center_x': 0.5}
         MDTopAppBar:
-            title: "AppName"
+            title: "QuickMark"
             left_action_items: [['chevron-left', lambda x: app.screen_manager_func()]]
             right_action_items: [["", ""]]
             elevation: 0
@@ -829,7 +824,7 @@ CustomScreenManager:
         height: self.minimum_height
         pos_hint: {'center_x': 0.5}
         MDTopAppBar:
-            title: "AppName"
+            title: "QuickMark"
             left_action_items: [['chevron-left', lambda x: app.screen_manager_func()]]
             right_action_items: [["", ""]]
             elevation: 0
@@ -1001,7 +996,7 @@ CustomScreenManager:
         height: self.minimum_height
         pos_hint: {'center_x': 0.5}
         MDTopAppBar:
-            title: "AppName"
+            title: "QuickMark"
             left_action_items: [['chevron-left', lambda x: app.screen_manager_func()]]
             right_action_items: [["",""]]
             elevation: 0
@@ -1224,7 +1219,7 @@ CustomScreenManager:
         height: self.minimum_height
         pos_hint: {'center_x': 0.5}
         MDTopAppBar:
-            title: "AppName"
+            title: "QuickMark"
             left_action_items: [['chevron-left', lambda x: app.screen_manager_func()]]
             right_action_items: [["", ""]]
             elevation: 0
@@ -1419,8 +1414,8 @@ CustomScreenManager:
         spacing: dp(10)
 
         MDTopAppBar:
-            title: "AppName"
-            right_action_items: [["cog-outline", lambda x: app.show_text_input_dialog()]]
+            title: "QuickMark"
+            right_action_items: [["",""]]
             elevation: 0
         ScrollView:
             id: mc_scroll_view
@@ -1440,8 +1435,8 @@ CustomScreenManager:
         spacing: dp(10)
 
         MDTopAppBar:
-            title: "AppName"
-            right_action_items: [["cog-outline", lambda x: app.show_text_input_dialog()]]
+            title: "QuickMark"
+            right_action_items: [["",""]]
             elevation: 0
         ScrollView:
             id: tf_scroll_view
@@ -1459,7 +1454,7 @@ CustomScreenManager:
         height: self.minimum_height
         pos_hint: {'center_x': 0.5}
         MDTopAppBar:
-            title: "AppName"
+            title: "QuickMark"
             left_action_items: [['chevron-left', lambda x: app.screen_manager_func()]]
             right_action_items: [["", ""]]
             elevation: 0
@@ -1563,7 +1558,7 @@ CustomScreenManager:
             height: self.minimum_height
             pos_hint: {'center_x': 0.5}
             MDTopAppBar:
-                title: "AppName"
+                title: "QuickMark"
                 left_action_items: [['chevron-left', lambda x: app.screen_manager_func()]]
                 right_action_items: [["", ""]]
                 elevation: 0
@@ -1763,7 +1758,7 @@ CustomScreenManager:
         orientation: 'vertical'
 
         MDTopAppBar:
-            title: "AppName"
+            title: "QuickMark"
             pos_hint: {'center':0.5}
             elevation: 0
 
@@ -1880,7 +1875,7 @@ CustomScreenManager:
         orientation: 'vertical'
 
         MDTopAppBar:
-            title: "AppName"
+            title: "QuickMark"
             pos_hint: {'center':0.5}
             elevation: 0
 
@@ -1997,7 +1992,7 @@ CustomScreenManager:
         height: self.minimum_height
         pos_hint: {'center_x': 0.5}
         MDTopAppBar:
-            title: "AppName"
+            title: "QuickMark"
             left_action_items: [['chevron-left', lambda x: app.screen_manager_func()]]
             right_action_items: [["cog-outline", lambda x: print(setattr(root.manager, 'current', 'name'),root.add_new_sheet(),'hello world')]]
             elevation: 0
@@ -2161,7 +2156,7 @@ CustomScreenManager:
         height: self.minimum_height
         pos_hint: {'center_x': 0.5}
         MDTopAppBar:
-            title: "AppName"
+            title: "QuickMark"
             right_action_items: [['']]
             left_action_items: [['chevron-left', lambda x: app.screen_manager_func()]]
             elevation: 0
